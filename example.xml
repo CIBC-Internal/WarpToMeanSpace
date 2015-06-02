@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+
+<!-- Parameters used to generate meshes out of the correspondence model of nih_full data -->
+
+<number_of_particles> 4096 </number_of_particles>
+
+<out_prefix> /usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/warpToMeanSpace.2/pelvis_normals </out_prefix>
+
+<!-- this is number of particles to be used to build the warp, their choice will be based on the ranking if point files are provided -->
+<!-- otherwise, the choice will be random -->
+<number_of_correspondences_in_warp> 4000 </number_of_correspondences_in_warp> 
+
+<!-- whether to factor out scaling when doing procrustes analysis of the resulting correspondence model -->
+<do_procrustes_scaling> 0 </do_procrustes_scaling> 
+
+<!-- isovalue to extract the isosurface (template mesh) for the mean distance transform -->
+<!-- to make sure no holes (don't use strict 0.0 since this will isosurface a mean distance transform - i.e. having non-zero isosurface) -->
+<levelsetValue> 0.0 </levelsetValue> 
+
+<!-- percentage to decimate the resulting isosurface -->
+<targetReduction> 0.0 </targetReduction>
+
+<!-- feature angle to be preserved in degrees -->
+<featureAngle> 30 </featureAngle>
+
+<!-- number of iterations to smooth the levelset -->
+<lsSmootherIterations> 1 </lsSmootherIterations>
+
+<!-- number of iterations to smooth the initial mesh -->
+<meshSmootherIterations> 1 </meshSmootherIterations>
+
+<!-- check if topology changes are allowed -->
+<preserveTopology> 1 </preserveTopology>
+
+<!-- check if we want to display the computed template -->
+<display> 0 </display>
+
+<!-- Set of final correspondence points in "local" coordinate space. -->
+<local_point_files>
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.00.wpts 
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.01.wpts 
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.02.wpts 
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.03.wpts 
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.04.wpts 
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.05.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.06.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.07.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.08.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.09.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.11.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.12.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.13.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.14.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.16.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.17.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.19.wpts
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/final_4096.bckup/pelvis_normals.20.wpts
+</local_point_files>
+
+<!-- Set of input distance transform files to process -->
+<distance_transform_files>
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.00.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.01.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.02.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.03.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.04.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.05.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.06.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.07.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.08.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.09.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.11.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.12.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.13.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.14.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.16.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.17.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.19.DT.nrrd
+/usr/sci/projects/FAI/DATA/PELVIS_NORMALS_SW/groom/pelvis_normals.20.DT.nrrd
+</distance_transform_files>
