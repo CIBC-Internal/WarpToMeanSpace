@@ -39,16 +39,6 @@ distribution.
 #ifndef TIXML_STRING_INCLUDED
 #define TIXML_STRING_INCLUDED
 
-#if defined (_WIN32)
-	#if defined(tinyxml_EXPORTS)
-		#define EXPORT __declspec(dllexport)
-	#else
-		#define EXPORT __declspec(dllimport)
-	#endif
-#else
-	#define EXPORT
-#endif
-
 #include <assert.h>
 #include <string.h>
 
@@ -74,7 +64,7 @@ distribution.
    The buffer allocation is made by a simplistic power of 2 like mechanism : if we increase
    a string and there's no more room, we allocate a buffer twice as big as we need.
 */
-class EXPORT TiXmlString
+class TiXmlString
 {
   public :
 	// The size type used
@@ -286,26 +276,26 @@ inline bool operator < (const TiXmlString & a, const TiXmlString & b)
 	return strcmp(a.c_str(), b.c_str()) < 0;
 }
 
-inline EXPORT bool operator != (const TiXmlString & a, const TiXmlString & b) { return !(a == b); }
-inline EXPORT bool operator >  (const TiXmlString & a, const TiXmlString & b) { return b < a; }
-inline EXPORT bool operator <= (const TiXmlString & a, const TiXmlString & b) { return !(b < a); }
-inline EXPORT bool operator >= (const TiXmlString & a, const TiXmlString & b) { return !(a < b); }
+inline bool operator != (const TiXmlString & a, const TiXmlString & b) { return !(a == b); }
+inline bool operator >  (const TiXmlString & a, const TiXmlString & b) { return b < a; }
+inline bool operator <= (const TiXmlString & a, const TiXmlString & b) { return !(b < a); }
+inline bool operator >= (const TiXmlString & a, const TiXmlString & b) { return !(a < b); }
 
-inline EXPORT bool operator == (const TiXmlString & a, const char* b) { return strcmp(a.c_str(), b) == 0; }
-inline EXPORT bool operator == (const char* a, const TiXmlString & b) { return b == a; }
-inline EXPORT bool operator != (const TiXmlString & a, const char* b) { return !(a == b); }
-inline EXPORT bool operator != (const char* a, const TiXmlString & b) { return !(b == a); }
+inline bool operator == (const TiXmlString & a, const char* b) { return strcmp(a.c_str(), b) == 0; }
+inline bool operator == (const char* a, const TiXmlString & b) { return b == a; }
+inline bool operator != (const TiXmlString & a, const char* b) { return !(a == b); }
+inline bool operator != (const char* a, const TiXmlString & b) { return !(b == a); }
 
-EXPORT TiXmlString operator + (const TiXmlString & a, const TiXmlString & b);
-EXPORT TiXmlString operator + (const TiXmlString & a, const char* b);
-EXPORT TiXmlString operator + (const char* a, const TiXmlString & b);
+TiXmlString operator + (const TiXmlString & a, const TiXmlString & b);
+TiXmlString operator + (const TiXmlString & a, const char* b);
+TiXmlString operator + (const char* a, const TiXmlString & b);
 
 
 /*
    TiXmlOutStream is an emulation of std::ostream. It is based on TiXmlString.
    Only the operators that we need for TinyXML have been developped.
 */
-class EXPORT TiXmlOutStream : public TiXmlString
+class TiXmlOutStream : public TiXmlString
 {
 public :
 

@@ -8,7 +8,11 @@ void visMesh(vtkSmartPointer<vtkPolyData> mesh, std::string window_title)
     vtkSmartPointer<vtkPolyDataMapper> mapper =
             vtkSmartPointer<vtkPolyDataMapper>::New();
 
+#if VTK_MAJOR_VERSION <= 5
     mapper->SetInput(mesh);
+#else
+    mapper->SetInputData(mesh);
+#endif
     mapper->SetScalarRange(mesh->GetScalarRange());
 
     vtkSmartPointer<vtkActor> actor =
@@ -40,7 +44,11 @@ void visMeshWithNormals(vtkSmartPointer<vtkPolyData> mesh, int ratio, std::strin
 
     vtkSmartPointer<vtkPolyDataNormals> normals =
             vtkSmartPointer<vtkPolyDataNormals>::New();
+#if VTK_MAJOR_VERSION <= 5
     normals->SetInput(mesh);
+#else
+    normals->SetInputData(mesh);
+#endif
     normals->ConsistencyOn();
     normals->AutoOrientNormalsOn();
     normals->ComputePointNormalsOn();
@@ -65,7 +73,11 @@ void visMeshWithNormals(vtkSmartPointer<vtkPolyData> mesh, int ratio, std::strin
     //    # read. The RandonModeOn and SetOnRatio combine to random select one out
     //    # of every 10 points in the dataset.
     vtkSmartPointer<vtkMaskPoints> ptMask = vtkSmartPointer<vtkMaskPoints>::New();
+#if VTK_MAJOR_VERSION <= 5
     ptMask->SetInput(mesh);
+#else
+    ptMask->SetInputData(mesh);
+#endif
     ptMask->SetOnRatio(ratio);
     ptMask->RandomModeOn();
 
@@ -123,7 +135,11 @@ void visMeshWithParticlesNormals(vtkSmartPointer<vtkPolyData> mesh, vtkSmartPoin
 {
     vtkSmartPointer<vtkPolyDataNormals> normals =
             vtkSmartPointer<vtkPolyDataNormals>::New();
+#if VTK_MAJOR_VERSION <= 5
     normals->SetInput(particlesData);
+#else
+    normals->SetInputData(particlesData);
+#endif
     normals->Update();
 
     // Create a mapper and actor
@@ -169,7 +185,11 @@ void visMeshWithParticlesNormals(vtkSmartPointer<vtkPolyData> mesh, vtkSmartPoin
 
     vtkSmartPointer<vtkPolyDataMapper> meshMapper =
             vtkSmartPointer<vtkPolyDataMapper>::New();
+#if VTK_MAJOR_VERSION <= 5
     meshMapper->SetInput(mesh);
+#else
+    meshMapper->SetInputData(mesh);
+#endif
     meshMapper->SetScalarRange(mesh->GetScalarRange());
 
     vtkSmartPointer<vtkActor> meshActor =
@@ -220,7 +240,7 @@ void visMeshWithParticles(vtkSmartPointer<vtkPolyData> mesh,
     glyph3D->SetSource(sphereSource->GetOutput());
     glyph3D->SetInput(polydata);
 #else
-    glyph3D->SetSourceConnection(cubeSource->GetOutputPort());
+    glyph3D->SetSourceConnection(sphereSource->GetOutputPort());
     glyph3D->SetInputData(polydata);
 #endif
     glyph3D->Update();
@@ -238,7 +258,11 @@ void visMeshWithParticles(vtkSmartPointer<vtkPolyData> mesh,
 
     vtkSmartPointer<vtkPolyDataMapper> meshMapper =
             vtkSmartPointer<vtkPolyDataMapper>::New();
+#if VTK_MAJOR_VERSION <= 5
     meshMapper->SetInput(mesh);
+#else
+    meshMapper->SetInputData(mesh);
+#endif
     meshMapper->SetScalarRange(mesh->GetScalarRange());
 
     vtkSmartPointer<vtkActor> meshActor =
@@ -286,7 +310,11 @@ void visMeshWithParticles(vtkSmartPointer<vtkPolyData> mesh,
 
     vtkSmartPointer<vtkPolyDataMapper> meshMapper =
             vtkSmartPointer<vtkPolyDataMapper>::New();
+#if VTK_MAJOR_VERSION <= 5
     meshMapper->SetInput(mesh);
+#else
+    meshMapper->SetInputData(mesh);
+#endif
     meshMapper->SetScalarRange(mesh->GetScalarRange());
 
     vtkSmartPointer<vtkActor> meshActor =
@@ -404,7 +432,11 @@ void visMeshWithParticles(vtkSmartPointer<vtkPolyData> mesh,
 
     vtkSmartPointer<vtkPolyDataMapper> meshMapper =
             vtkSmartPointer<vtkPolyDataMapper>::New();
+#if VTK_MAJOR_VERSION <= 5
     meshMapper->SetInput(mesh);
+#else
+    meshMapper->SetInputData(mesh);
+#endif
     meshMapper->SetScalarRange(mesh->GetScalarRange());
 
     vtkSmartPointer<vtkActor> meshActor =

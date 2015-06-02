@@ -147,7 +147,7 @@ void cartesian2spherical(const double inPoint[3], double outPoint[3])
     else
     {
         // Change range to [0, 2*Pi], otherwise the same as atan2(y, x)
-        outPoint[2] = double(vtkMath::DoublePi()) + atan2(-y, -x);
+        outPoint[2] = double(vtkMath::Pi()) + atan2(-y, -x);
     }
 }
 

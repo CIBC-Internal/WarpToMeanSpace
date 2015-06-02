@@ -626,12 +626,20 @@ int main( int argc , char* argv[] )
     std::string outfilename = params.out_prefix + ".meanDenseShape.vtk" ;
     vtkPolyDataWriter * polywriter =   vtkPolyDataWriter::New();
     polywriter->SetFileName(outfilename.c_str());
+#if VTK_MAJOR_VERSION <= 5
     polywriter->SetInput(meanDenseShape);
+#else
+    polywriter->SetInputData(meanDenseShape);
+#endif
     polywriter->Update();
 
     std::string outfilename2 = params.out_prefix + ".meanDenseShape.ply" ;
     vtkPLYWriter *plyWriter=vtkPLYWriter::New();
+#if VTK_MAJOR_VERSION <= 5
     plyWriter->SetInput(meanDenseShape);
+#else
+    plyWriter->SetInputData(meanDenseShape);
+#endif
     plyWriter->SetFileName(outfilename2.c_str());
     plyWriter->Update();
 
@@ -867,7 +875,11 @@ vtkSmartPointer<vtkPolyData> extractIsosurface(vtkSmartPointer<vtkImageData> vol
     vtkSmartPointer<vtkContourFilter> ls = vtkSmartPointer<vtkContourFilter>::New();
     //vtkSmartPointer<vtkMarchingCubes> ls = vtkSmartPointer<vtkMarchingCubes>::New();
     //ls->SetInputConnection( reader->GetOutputPort() );
+#if VTK_MAJOR_VERSION <= 5
     ls->SetInput( volData );
+#else
+    ls->SetInputData( volData );
+#endif
     ls->SetValue(0, levelsetValue);
     ls->Update();
     std::cout << "..";
@@ -880,7 +892,11 @@ vtkSmartPointer<vtkPolyData> extractIsosurface(vtkSmartPointer<vtkImageData> vol
 
     vtkSmartPointer<vtkPolyDataConnectivityFilter> conn = vtkSmartPointer<vtkPolyDataConnectivityFilter>::New();
     conn->SetExtractionModeToLargestRegion();
+#if VTK_MAJOR_VERSION <= 5
     conn->SetInput(lsSmoother->GetOutput());
+#else
+    conn->SetInputData(lsSmoother->GetOutput());
+#endif
     conn->Update();
 
     vtkSmartPointer<vtkDecimatePro> decimator = vtkSmartPointer<vtkDecimatePro>::New();
@@ -1068,23 +1084,38 @@ vnl_matrix<double> computeParticlesNormals(string localPointsFilename,
 
     // (4) get the normals by probing the DT-based normal computation
     vtkSmartPointer<vtkProbeFilter> probe_x = vtkSmartPointer<vtkProbeFilter>::New();
+#if VTK_MAJOR_VERSION <= 5
     probe_x->SetInput(particlesData);
     probe_x->SetSource(Nx);
+#else
+    probe_x->SetInputData(particlesData);
+    probe_x->SetSourceData(Nx);
+#endif
     probe_x->Update();
 
     vtkSmartPointer<vtkProbeFilter> probe_y = vtkSmartPointer<vtkProbeFilter>::New();
+#if VTK_MAJOR_VERSION <= 5
     probe_y->SetInput(particlesData);
     probe_y->SetSource(Ny) ;
+#else
+    probe_y->SetInputData(particlesData);
+    probe_y->SetSourceData(Ny) ;
+#endif
     probe_y->Update();
 
     vtkSmartPointer<vtkProbeFilter> probe_z = vtkSmartPointer<vtkProbeFilter>::New();
+#if VTK_MAJOR_VERSION <= 5
     probe_z->SetInput(particlesData);
     probe_z->SetSource(Nz) ;
+#else
+    probe_z->SetInputData(particlesData);
+    probe_z->SetSourceData(Nz) ;
+#endif
     probe_z->Update();
 
-    vtkFloatArray* nx = vtkFloatArray::SafeDownCast (probe_x->GetPolyDataOutput()->GetPointData()->GetArray("scalars"));
-    vtkFloatArray* ny = vtkFloatArray::SafeDownCast (probe_y->GetPolyDataOutput()->GetPointData()->GetArray("scalars"));
-    vtkFloatArray* nz = vtkFloatArray::SafeDownCast (probe_z->GetPolyDataOutput()->GetPointData()->GetArray("scalars"));
+    vtkFloatArray* nx = vtkFloatArray::SafeDownCast (probe_x->GetPolyDataOutput()->GetPointData()->GetScalars("x"));
+    vtkFloatArray* ny = vtkFloatArray::SafeDownCast (probe_y->GetPolyDataOutput()->GetPointData()->GetScalars("y"));
+    vtkFloatArray* nz = vtkFloatArray::SafeDownCast (probe_z->GetPolyDataOutput()->GetPointData()->GetScalars("z"));
 
     // Set point normals
     vtkSmartPointer<vtkDoubleArray> pointNormalsArray =

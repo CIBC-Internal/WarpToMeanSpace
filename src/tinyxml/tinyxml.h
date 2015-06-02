@@ -26,16 +26,6 @@ distribution.
 #ifndef TINYXML_INCLUDED
 #define TINYXML_INCLUDED
 
-#if defined (_WIN32)
-	#if defined(tinyxml_EXPORTS)
-		#define EXPORT __declspec(dllexport)
-	#else
-		#define EXPORT __declspec(dllimport)
-	#endif
-#else
-	#define EXPORT
-#endif
-
 #ifdef _MSC_VER
 #pragma warning( push )
 #pragma warning( disable : 4530 )
@@ -108,7 +98,7 @@ const int TIXML_PATCH_VERSION = 3;
 /*	Internal structure for tracking location of items 
 	in the XML file.
 */
-struct EXPORT TiXmlCursor
+struct TiXmlCursor
 {
 	TiXmlCursor()		{ Clear(); }
 	void Clear()		{ row = col = -1; }
@@ -136,7 +126,7 @@ struct EXPORT TiXmlCursor
 
 	@sa TiXmlNode::Accept()
 */
-class EXPORT TiXmlVisitor
+class TiXmlVisitor
 {
 public:
 	virtual ~TiXmlVisitor() {}
@@ -162,7 +152,7 @@ public:
 };
 
 // Only used by Attribute::Query functions
-enum EXPORT
+enum 
 { 
 	TIXML_SUCCESS,
 	TIXML_NO_ATTRIBUTE,
@@ -171,7 +161,7 @@ enum EXPORT
 
 
 // Used by the parsing routines.
-enum EXPORT TiXmlEncoding
+enum TiXmlEncoding
 {
 	TIXML_ENCODING_UNKNOWN,
 	TIXML_ENCODING_UTF8,
@@ -202,7 +192,7 @@ const TiXmlEncoding TIXML_DEFAULT_ENCODING = TIXML_ENCODING_UNKNOWN;
 	A Decleration contains: Attributes (not on tree)
 	@endverbatim
 */
-class EXPORT TiXmlBase
+class TiXmlBase
 {
 	friend class TiXmlNode;
 	friend class TiXmlElement;
@@ -272,7 +262,7 @@ public:
 	*/
 	static void EncodeString( const TIXML_STRING& str, TIXML_STRING* out );
 
-	enum 
+	enum
 	{
 		TIXML_NO_ERROR = 0,
 		TIXML_ERROR,
@@ -431,7 +421,7 @@ private:
 	in a document, or stand on its own. The type of a TiXmlNode
 	can be queried, and it can be cast to its more defined type.
 */
-class EXPORT TiXmlNode : public TiXmlBase
+class TiXmlNode : public TiXmlBase
 {
 	friend class TiXmlDocument;
 	friend class TiXmlElement;
@@ -787,7 +777,7 @@ private:
 		  part of the tinyXML document object model. There are other
 		  suggested ways to look at this problem.
 */
-class EXPORT TiXmlAttribute : public TiXmlBase
+class TiXmlAttribute : public TiXmlBase
 {
 	friend class TiXmlAttributeSet;
 
@@ -911,7 +901,7 @@ private:
 		- I like circular lists
 		- it demonstrates some independence from the (typical) doubly linked list.
 */
-class EXPORT TiXmlAttributeSet
+class TiXmlAttributeSet
 {
 public:
 	TiXmlAttributeSet();
@@ -951,7 +941,7 @@ private:
 	and can contain other elements, text, comments, and unknowns.
 	Elements also contain an arbitrary number of attributes.
 */
-class EXPORT TiXmlElement : public TiXmlNode
+class TiXmlElement : public TiXmlNode
 {
 public:
 	/// Construct an element.
@@ -1161,7 +1151,7 @@ private:
 
 /**	An XML comment.
 */
-class EXPORT TiXmlComment : public TiXmlNode
+class TiXmlComment : public TiXmlNode
 {
 public:
 	/// Constructs an empty comment.
@@ -1211,7 +1201,7 @@ private:
 	you generally want to leave it alone, but you can change the output mode with 
 	SetCDATA() and query it with CDATA().
 */
-class EXPORT TiXmlText : public TiXmlNode
+class TiXmlText : public TiXmlNode
 {
 	friend class TiXmlElement;
 public:
@@ -1284,7 +1274,7 @@ private:
 	handled as special cases, not generic attributes, simply
 	because there can only be at most 3 and they are always the same.
 */
-class EXPORT TiXmlDeclaration : public TiXmlNode
+class TiXmlDeclaration : public TiXmlNode
 {
 public:
 	/// Construct an empty declaration.
@@ -1353,7 +1343,7 @@ private:
 
 	DTD tags get thrown into TiXmlUnknowns.
 */
-class EXPORT TiXmlUnknown : public TiXmlNode
+class TiXmlUnknown : public TiXmlNode
 {
 public:
 	TiXmlUnknown() : TiXmlNode( TiXmlNode::UNKNOWN )	{}
@@ -1392,7 +1382,7 @@ private:
 	XML pieces. It can be saved, loaded, and printed to the screen.
 	The 'value' of a document node is the xml file name.
 */
-class EXPORT TiXmlDocument : public TiXmlNode
+class TiXmlDocument : public TiXmlNode
 {
 public:
 	/// Create an empty document, that has no name.
@@ -1641,7 +1631,7 @@ private:
 	}
 	@endverbatim
 */
-class EXPORT TiXmlHandle
+class TiXmlHandle
 {
 public:
 	/// Create a handle from any node (at any depth of the tree.) This can be a null pointer.
@@ -1740,7 +1730,7 @@ private:
 	fprintf( stdout, "%s", printer.CStr() );
 	@endverbatim
 */
-class EXPORT TiXmlPrinter : public TiXmlVisitor
+class TiXmlPrinter : public TiXmlVisitor
 {
 public:
 	TiXmlPrinter() : depth( 0 ), simpleTextPrint( false ),

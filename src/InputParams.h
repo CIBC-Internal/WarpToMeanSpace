@@ -269,12 +269,18 @@ public:
             // remove the output if it already exists to remove any historical results, just in case
             std::string cmdStr = "rm -rf " + out_path;
             std::system(cmdStr.c_str());
-            int mkdirStatus = mkdir(out_path.c_str(), S_IRWXU);
+            int mkdirStatus = 
+#ifdef WIN32
+				CreateDirectory(out_path.c_str(), NULL );
+#else
+				mkdir(out_path.c_str(), S_IRWXU);
+#endif
 
             // copy the current param file to the output to keep track of the parameters that generated this output
             cmdStr = "cp " + std::string(filename) + " " + out_path;
             std::system(cmdStr.c_str());
         }
+		return 0;
     }
 };
 
